@@ -1,0 +1,26 @@
+---
+- name: Test Metron repo clone
+  hosts: localhost
+  tasks:
+  - name: Check metron repo has been cloned
+    shell: ls ~/ | grep -i metron
+    register: out1
+    ignore_errors: yes
+  - debug:
+     msg: "Metron Repo Test Fail"
+    when: out1.failed == true
+  - debug:
+     msg: "Metron Repo Test Pass"
+    when: out1.failed == false
+
+  - name: Check if branch Metron_0.4.0 is checked
+    command: git checkout Metron_0.4.0
+    register: out2
+    ignore_errors: yes
+  - debug:
+     msg: "Metron Repo Branch Test Fail"
+    when: out1.failed == true
+  - debug:
+     msg: "Metron Repo Branch Test Pass"
+    when: out1.failed == false
+

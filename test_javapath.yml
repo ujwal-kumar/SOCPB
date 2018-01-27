@@ -1,0 +1,14 @@
+---
+- name: Check java path
+  hosts: localhost
+  tasks:
+  - name: Check java path
+    command: grep -Fxq 'export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s_/jre/bin/java__")' /etc/profile.d/java_18.sh
+    register: out
+    ignore_errors: yes
+  - debug:
+     msg: "Test Fail"
+    when: out.failed == true
+  - debug:
+     msg: "Test Pass"
+    when: out.failed == false

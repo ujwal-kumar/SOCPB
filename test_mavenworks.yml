@@ -1,0 +1,14 @@
+---
+- name: Play to check maven works
+  hosts: localhost
+  tasks:
+  - name: Check maven command
+    command: mvn -v
+    register: output
+    ignore_errors: yes
+  - debug:
+     msg: "Maven working Test Fail"
+    when: output.failed == true
+  - debug:
+     msg: "Maven working Test Pass"
+    when: output.failed == false 

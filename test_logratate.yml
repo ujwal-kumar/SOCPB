@@ -1,0 +1,14 @@
+---
+- name: Check if Logrotate is downloaded
+  hosts: localhost
+  tasks:
+  - name: Check yaml file has been downloaded
+    shell: ls /etc/logrotate.d/metron-ambari | grep -i metron-hadoop-logrotate.yml
+    register: output
+    ignore_errors: yes
+  - debug:
+     msg: "Logrotate download Test Fail"
+    when: output.failed == true
+  - debug:
+     msg: "Logrotate download Test Pass"
+    when: output.failed == false

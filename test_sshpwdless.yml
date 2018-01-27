@@ -1,0 +1,14 @@
+---
+- name: Check passwordless ssh
+  hosts: localhost
+  tasks:
+  - name: Check for entry of Master node in slave node
+    command: grep -Fxq "root@localhost.localdomain" ~/.ssh/authorized_keys
+    register: out
+    ignore_errors: yes
+  - debug:
+     msg: "Test Fail"
+    when: out.failed == true
+  - debug:
+     msg: "test Pass"
+    when: out.failed == false

@@ -1,0 +1,14 @@
+---
+- name: Check docker installation
+  hosts: localhost
+  tasks:
+  - name: Check docker-io is installed
+    yum:
+     list: docker-io
+    register: output
+  - debug:
+     msg: "Docker-io Installation Test Fail"
+    when: output.results|length <= 1
+  - debug:
+     msg: "Docker-io Installation Test Pass"
+    when: output.results|length > 1

@@ -1,0 +1,25 @@
+---
+- name: Test java installation
+  hosts: localhost
+  tasks:
+  - name: Check java installation
+    yum:
+     list: java-1.8.0-openjdk
+    register: out1
+  - debug:
+     msg: "java openjdk installation Test Pass"
+    when: out1.results|length > 1
+  - debug:
+     msg: "java openjdk installation Test Fail"
+    when: out1.results|length <= 1
+
+  - name: Check java installation
+    yum:
+     list: java-1.8.0-openjdk-devel
+    register: out2
+  - debug:
+     msg: "java openjdk-devel installation Test Pass"
+    when: out2.results|length > 1
+  - debug:
+     msg: "java openjdk-devel installation Test Fail"
+    when: out2.results|length <= 1

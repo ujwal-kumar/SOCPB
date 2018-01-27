@@ -1,0 +1,25 @@
+---
+- name: Test Maven Installation
+  hosts: localhost
+  tasks:
+  - name: Check maven installation
+    shell: ls /opt | grep -i apache-maven-3.3.9
+    register: out1
+    ignore_errors: yes
+  - debug:
+     msg: "Maven installation Test Fail"
+    when: out1.failed == true
+  - debug:
+     msg: "Maven installation Test Pass"
+    when: out1.failed == false
+
+  - name: Check maven path is set
+    command: grep -Fxq 'export PATH=/opt/apache-maven-3.3.9/bin:$PATH' /etc/profile.d/maven.sh
+    register: out2
+    ignore_errors: yes
+  - debug:
+     msg: "Maven path Test Fail"
+    when: out2.failed == true
+  - debug:
+     msg: "Maven path Test Pass"
+    when: out2.failed == false

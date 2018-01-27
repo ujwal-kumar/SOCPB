@@ -1,0 +1,24 @@
+---
+- name: Check passwordless ssh
+  hosts: localhost
+  tasks:
+  - name: Check transparent hugepage is disabled
+    command: grep -Fxq "GRUB_CMDLINE_LINUX="crashkernel=auto rd.lvm.lv=cl/root rd.lvm.lv=cl/swap rhgb quiet transparent_hugepage=never"" /etc/default/grub
+    register: out1
+    ignore_errors: yes
+  - debug:
+     msg: "Test Fail"
+    when: out1.failed == true
+  - debug:
+     msg: "test Pass"
+    when: out1.failed == false
+
+  - name: Check the output
+    command: cat /sys/kernel/mm/transparent_hugepage/enabled
+    register: out2
+  - debug:
+     msg: "Test Fail"
+    when: out2.stdout == "[always] madvise never"
+  - debug:
+     msg: "Test Pass"
+    when: out2.stdout == "always madvise [never]"

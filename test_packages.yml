@@ -1,0 +1,179 @@
+---
+- name: Check whether packages has been installed
+  hosts: localhost
+  tasks:
+  - name: Check Git has been installed
+    yum:
+     list: git
+    register: git_out
+  - debug:
+     msg: "Git installation Test Pass"
+    when: (git_out.results|length > 1)
+  - debug:
+     msg: "Git installation Test Fail"
+    when: (git_out.results|length <= 1)
+
+  - name: Check wget has been installed
+    yum:
+     list: wget
+    register: wget_out
+  - debug:
+     msg: "wget installation Test Pass"
+    when: (wget_out.results|length > 1)
+  - debug:
+     msg: "wget installation Test Fail"
+    when: (wget_out.results|length <= 1)
+
+  - name: Check curl has been installed
+    yum:
+     list: curl
+    register: curl_out
+  - debug:
+     msg: "Curl installation Test Pass"
+    when: (curl_out.results|length > 1)
+  - debug:
+     msg: "Curl installation Test Fail"
+    when: (curl_out.results|length <= 1)
+
+  - name: Check rpm has been installed
+    yum:
+     list: rpm
+    register: rpm_out
+  - debug:
+     msg: "rpm installation Test Pass"
+    when: (rpm_out.results|length > 1)
+  - debug:
+     msg: "rpm installation Test Fail"
+    when: (rpm_out.results|length <= 1)
+
+  - name: Check tar has been installed
+    yum:
+     list: tar
+    register: tar_out
+  - debug:
+     msg: "tar installation Test Pass"
+    when: (tar_out.results|length > 1)
+  - debug:
+     msg: "tar installation Test Fail"
+    when: (tar_out.results|length <= 1)
+
+  - name: Check unzip has been installed
+    yum:
+     list: unzip
+    register: unzip_out
+  - debug:
+     msg: "unzip installation Test Pass"
+    when: (unzip_out.results|length > 1)
+  - debug:
+     msg: "unzip installation Test Fail"
+    when: (unzip_out.results|length <= 1)
+
+  - name: Check bzip2 has been installed
+    yum:
+     list: bzip2
+    register: bzip2_out
+  - debug:
+     msg: "bzip2 installation Test Pass"
+    when: (bzip2_out.results|length > 1)
+  - debug:
+     msg: "bzip2 installation Test Fail"
+    when: (bzip2_out.results|length <= 1)
+
+  - name: Check createrepo has been installed
+    yum:
+     list: createrepo
+    register: createrepo_out
+  - debug:
+     msg: "createrepo installation Test Pass"
+    when: (createrepo_out.results|length > 1)
+  - debug:
+     msg: "createrepo installation Test Fail"
+    when: (createrepo_out.results|length <= 1)
+
+  - name: Check yum-utils has been installed
+    yum:
+     list: yum-utils
+    register: yumutils_out
+  - debug:
+     msg: "yum-utils installation Test Pass"
+    when: (yumutils_out.results|length > 1)
+  - debug:
+     msg: "yum-utils installation Test Fail"
+    when: (yumutils_out.results|length <= 1)
+
+  - name: Check ntp has been installed
+    yum:
+     list: ntp
+    register: ntp_out
+  - debug:
+     msg: "ntp installation Test Pass"
+    when: (ntp_out.results|length > 1)
+  - debug:
+     msg: "ntp installation Test Fail"
+    when: (ntp_out.results|length <= 1)
+
+  - name: Check python-pip has been installed
+    yum:
+     list: python-pip
+    register: pip_out
+  - debug:
+     msg: "python-pip installation Test Pass"
+    when: (pip_out.results|length > 1)
+  - debug:
+     msg: "python-pip installation Test Fail"
+    when: (pip_out.results|length <= 1)
+
+  - name: Check psutils has been installed
+    yum:
+     list: psutils
+    register: psutils_out
+  - debug:
+     msg: "psutils installation Test Pass"
+    when: (psutils_out.results|length > 1)
+  - debug:
+     msg: "psutils installation Test Fail"
+    when: (psutils_out.results|length <= 1)
+
+  - name: Check python-psutil has been installed
+    yum:
+     list: python-psutil
+    register: pythonpsutil_out
+  - debug:
+     msg: "python-psutil installation Test Pass"
+    when: (pythonpsutil_out.results|length > 1)
+  - debug:
+     msg: "python-psutil installation Test Fail"
+    when: (pythonpsutil_out.results|length <= 1)
+
+  - name: Check libffi-devel has been installed
+    yum:
+     list: libffi-devel
+    register: libffidevel_out
+  - debug:
+     msg: "libffi-devel installation Test Pass"
+    when: (libffidevel_out.results|length > 1)
+  - debug:
+     msg: "libffi-devel installation Test Fail"
+    when: (libffidevel_out.results|length <= 1)
+
+  - name: Check gcc has been installed
+    yum:
+     list: gcc
+    register: gcc_out
+  - debug:
+     msg: "gcc installation Test Pass"
+    when: (gcc_out.results|length > 1)
+  - debug:
+     msg: "gcc installation Test Fail"
+    when: (gcc_out.results|length <= 1)
+
+  - name: Check openssl-devel has been installed
+    yum:
+     list: openssl-devel
+    register: openssldevel_out
+  - debug:
+     msg: "openssl-devel installation Test Pass"
+    when: (openssldevel_out.results|length > 1)
+  - debug:
+     msg: "openssl-devel installation Test Fail"
+    when: (openssldevel_out.results|length <= 1)

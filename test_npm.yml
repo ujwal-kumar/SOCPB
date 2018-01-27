@@ -1,0 +1,14 @@
+---
+- name: Check npm installation
+  hosts: localhost
+  tasks:
+  - name: Check npm package is installed
+    yum:
+     list: npm
+    register: output
+  - debug:
+     msg: "NPM installation Test Fail"
+    when: output.results|length <= 1
+  - debug:
+     msg: "NPM installation Test Pass"
+    when: output.results|length > 1

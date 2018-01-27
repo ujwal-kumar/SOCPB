@@ -1,0 +1,14 @@
+---
+- name: Check if key is generated
+  hosts: localhost
+  tasks:
+  - name: Check for id_rsa.pub
+    command: ls ~/.ssh/id_rsa.pub
+    register: output
+    ignore_errors: yes
+  - debug:
+     msg: "Test Fail"
+    when: output.rc > 1
+  - debug:
+     msg: "Test Pass"
+    when: output.rc == 0

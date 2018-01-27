@@ -1,0 +1,36 @@
+---
+- name: Check /etc/hosts lines
+  hosts: localhost
+  tasks:
+  - name: Check ipv4 entry is not present
+    command: grep -Fxq "127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4" /etc/hosts
+    register: output1
+    ignore_errors: yes
+  - debug:
+     msg: "IPV4 entry is present: Test Fail"
+    when: output1.failed == false
+  - debug:
+     msg: "IPV4 entry is absent: Test Pass"
+    when: output1.failed == true
+
+  - name: Check ipv6 entry is not present
+    command: grep -Fxq "::1         localhost localhost.localdomain localhost6 localhost6.localdomain6" /etc/hosts
+    register: output2
+    ignore_errors: yes
+  - debug:
+     msg: "IPV6 entry is present: Test Fail"
+    when: output2.failed == false
+  - debug:
+     msg: "IPV6 entry is absent: Test Pass"
+    when: output2.failed == true
+
+  - name: Check localhost entry is present
+    command: grep -Fxq "127.0.0.1 localhost" /etc/hosts
+    register: output3
+    ignore_errors: yes
+  - debug:
+     msg: "localhost entry is absent: Test Fail"
+    when: output3.failed == true
+  - debug:
+     msg: "localhost entry is present: Test Pass"
+    when: output3.failed == false

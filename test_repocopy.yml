@@ -1,0 +1,14 @@
+---
+- name: Test Metron repo copy
+  hosts: localhost
+  tasks:
+  - name: Check metron repo has been copied
+    shell: ls ~/localrepo
+    register: out1
+    ignore_errors: yes
+  - debug:
+     msg: "Metron Repo copy Test Fail"
+    when: out1.stdout_lines|length < 1
+  - debug:
+     msg: "Metron Repo copy Test Pass"
+    when: out1.stdout_lines|length > 1

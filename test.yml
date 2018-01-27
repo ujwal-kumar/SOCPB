@@ -1,0 +1,19 @@
+---
+- name: Test playbook
+  hosts: localhost
+  tasks:
+  - name: Check package has been installed
+    yum:
+     list: tmux
+    register: res
+
+#  - debug:
+#     var: res
+
+  - debug:
+     msg: "Test Pass"
+    when: res.results|length > 1
+
+  - debug:
+     msg: "Test Fail"
+    when: res.results|length <= 1

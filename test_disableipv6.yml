@@ -1,0 +1,25 @@
+---
+- name: Check passwordless ssh
+  hosts: localhost
+  tasks:
+  - name: Check for entry of Master node in slave node
+    command: grep -Fxq "net.ipv6.conf.all.disable_ipv6 = 1" /etc/sysctl.conf 
+    register: out
+    ignore_errors: yes
+  - debug:
+     msg: "Test Fail"
+    when: out.failed == true
+  - debug:
+     msg: "test Pass"
+    when: out.failed == false
+
+  - name: Check for entry of Master node in slave node
+    command: grep -Fxq "net.ipv6.conf.default.disable_ipv6 = 1" /etc/sysctl.conf
+    register: out1
+    ignore_errors: yes
+  - debug:
+     msg: "Test Fail"
+    when: out1.failed == true
+  - debug:
+     msg: "test Pass"
+    when: out1.failed == false
